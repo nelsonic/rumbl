@@ -8,7 +8,7 @@ defmodule RumblWeb.UserController do
     {:ok, user} = Accounts.create_user(user_params)
 
     conn
-    |> put_flash(:info, "#{user.nam} created!")
+    |> put_flash(:info, "#{user.name} created!")
     |> redirect(to: Routes.user_path(conn, :index))
   end
 
