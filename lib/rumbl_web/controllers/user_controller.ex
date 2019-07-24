@@ -4,6 +4,14 @@ defmodule RumblWeb.UserController do
   alias Rumbl.Accounts
   alias Rumbl.Accounts.User
 
+  def create(conn, %{"user" => user_params}) do
+    {:ok, user} = Accounts.create_user(user_params)
+
+    conn
+    |> put_flash(:info, "#{user.nam} created!")
+    |> redirect(to: Routes.user_path(conn, :index))
+  end
+
   def index(conn, _params) do
     users = Accounts.list_users()
     render(conn, "index.html", users: users)
