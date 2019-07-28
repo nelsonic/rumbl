@@ -3,6 +3,12 @@ defmodule RumblWeb.VideoController do
 
   alias Rumbl.Multimedia
   alias Rumbl.Multimedia.Video
+  plug :load_categories when action in [:new, :create, :edit, :update]
+
+  # preload video categories p.129
+  defp load_categories(conn, _) do
+    assign(conn, :categories, Multimedia.list_alphabetical_categories())
+  end
 
   # this voodoo is from p.114
   def action(conn, _) do
