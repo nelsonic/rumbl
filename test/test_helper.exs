@@ -16,6 +16,7 @@ defmodule Rumbl.TestHelpers do
         password: attrs[:password] || "supersecret"
       })
       |> Accounts.register_user()
+    user
   end
 
   def video_fixture(%Accounts.User{} = user, attrs \\ %{}) do
