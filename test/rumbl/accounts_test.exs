@@ -54,4 +54,28 @@ defmodule Rumbl.AccountsTest do
     end
   end
 
+  describe "authenticate_by_username_and_pass/2" do
+    @pass "123456"
+
+    setup do
+      {:ok, user: user_fixture(password: @pass)}
+    end
+
+    test "returns user with correct password", %{user: user} do
+      assert {:ok, auth_user} =
+        Accounts.authenticate_by_username_and_pass(user.username, @pass)
+    end
+
+    test "returns unauthorized error with invalid password", %{user: user} do
+      assert {:error, :unauthorized} =
+        Accounts.authenticate_by_username_and_pass(user.username, "badpass")
+    end
+
+    test "returns not found error with no matching user for email" do
+      assert {:error, :not_found} =
+        Accounts.authenticate_by_username_and_pass("unknownuser", @pass)
+    end
+
+  end
+
 end
