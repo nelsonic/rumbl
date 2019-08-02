@@ -16,3 +16,6 @@ config :rumbl, RumblWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
+
+# p.171 reduce hashing rounds to speed up tests:
+config :pbkdf2_elixir, :rounds, 1
