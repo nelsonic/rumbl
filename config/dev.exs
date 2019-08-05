@@ -26,6 +26,7 @@ config :rumbl, RumblWeb.Endpoint,
       "--mode",
       "development",
       "--watch-stdin",
+      "--colors",
       cd: Path.expand("../assets", __DIR__)
     ]
   ]
