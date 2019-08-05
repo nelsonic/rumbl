@@ -20,6 +20,7 @@ defmodule Rumbl.Multimedia.Video do
     |> cast(attrs, [:url, :title, :description, :category_id])
     |> validate_required([:url, :title, :description])
     |> assoc_constraint(:category)
+    |> slugify_title()
   end
 
   defp slugify_title(changeset) do
