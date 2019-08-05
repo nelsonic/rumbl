@@ -21,4 +21,17 @@ defmodule Rumbl.Multimedia.Video do
     |> validate_required([:url, :title, :description])
     |> assoc_constraint(:category)
   end
+
+  defp slugify_title(changeset) do
+    case fetch_change(changeset, :title) do
+      {:ok, new_title} -> put_change(changeset, :slug, slugify(new_title))
+      :error -> changeset
+    end
+  end
+
+  defp slugify(str) do
+    str
+    |> String.downcase()
+    |> String.replace(~r/[^\w-]+/u, "-")
+  end
 end
