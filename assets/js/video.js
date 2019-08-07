@@ -11,7 +11,7 @@ let Video = {
     })
   },
 
-  onReady(videoId, socket){
+  onReady(videoId, socket) {
     let msgContainer = document.getElementById("msg-container")
     let msgInput     = document.getElementById("msg-input")
     let postButton   = document.getElementById("msg-submit")
