@@ -3,6 +3,7 @@ defmodule RumblWeb.UserSocket do
 
   ## Channels
   # channel "room:*", RumblWeb.RoomChannel
+  channel "videos:*", RumblWeb.VideoChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After
