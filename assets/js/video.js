@@ -19,6 +19,7 @@ let Video = {
 
     postButton.addEventListener("click", e => {
       let payload = {body: msgInput.value, at: Player.getCurrentTime()}
+      console.log("payload:", payload);
       vidChannel.push("new_annotation", payload)
                 .receive("error", e => console.log(e) )
       msgInput.value = ""
