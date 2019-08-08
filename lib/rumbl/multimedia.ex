@@ -104,6 +104,23 @@ defmodule Rumbl.Multimedia do
     Video.changeset(video, %{})
   end
 
+  alias Rumbl.Multimedia.Annotation
+
+  def annotate_video(%Accounts.User{id: user_id}, video_id, attrs) do
+    %Annotation{video_id: video_id, user_id: user_id}
+    |> Annotation.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  def list_annotations(%Video{} = video) do
+    Repo.all(
+      from a in Ecto.assoc(video, :annotations),
+        order_by: [asc: a.at, asc: a.id],
+        limit: 500,
+        preload: [:user]
+    )
+  end
+
   # user scoped functions p.115
   def list_user_videos(%Accounts.User{} = user) do
     Video
