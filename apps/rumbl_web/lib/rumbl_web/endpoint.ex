@@ -1,5 +1,5 @@
 defmodule RumblWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :rumbl
+  use Phoenix.Endpoint, otp_app: :rumbl_web
 
   socket "/socket", RumblWeb.UserSocket,
     websocket: true,
@@ -11,7 +11,7 @@ defmodule RumblWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :rumbl,
+    from: :rumbl_web,
     gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 

@@ -16,13 +16,13 @@ defmodule RumblWeb.VideoViewTest do
 
     assert String.contains?(content, "Listing Videos")
 
-    for video <- video do
+    for video <- videos do
       assert String.contains?(content, video.title)
     end
   end
 
   test "renders new.html", %{conn: conn} do
-    owner = %Rumbl.Accounts.User{}
+    # owner = %Rumbl.Accounts.User{}
     changeset = Rumbl.Multimedia.change_video(%Rumbl.Multimedia.Video{})
     categories = [%Rumbl.Multimedia.Category{id: 123, name: "cats"}]
 
