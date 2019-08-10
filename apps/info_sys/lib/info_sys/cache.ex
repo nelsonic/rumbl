@@ -31,7 +31,7 @@ defmodule InfoSys.Cache do
        :public,
        read_concurrency: true,
        write_concurrency: true
-      ])
+       ])
   end
 
   defp tab_name(name), do: :"#{name}_cache"
