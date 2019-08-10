@@ -36,5 +36,5 @@ defmodule InfoSys.Wolfram do
     URI.encode_query(appid: id(), input: input, format: "plaintext")
   end
 
-  defp id, do: Application.fetch_env!(:rumbl, :wolfram)[:app_id]
+  defp id, do: Application.fetch_env!(:info_sys, :wolfram)[:app_id]
 end

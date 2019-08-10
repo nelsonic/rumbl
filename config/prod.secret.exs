@@ -42,6 +42,5 @@ wolfram_app_id =
   raise """
   environment variable WOLFRAM_APP_ID is missing.
   """
-
-IO.inspect(wolfram_app_id, label: "wolfram_app_id")
+  
 config :info_sys, :wolfram, app_id: wolfram_app_id
