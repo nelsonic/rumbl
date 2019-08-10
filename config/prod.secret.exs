@@ -36,3 +36,11 @@ config :rumbl_web, RumblWeb.Endpoint,
 #
 # Then you can assemble a release by calling `mix release`.
 # See `mix help release` for more information.
+
+wolfram_app_id =
+  System.get_env("WOLFRAM_APP_ID") ||
+  raise """
+  environment variable WOLFRAM_APP_ID is missing.
+  """
+
+config :info_sys, :wolfram, app_id: wolfram_app_id
