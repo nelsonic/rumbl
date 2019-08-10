@@ -3,8 +3,8 @@ defmodule InfoSys.Cache do
 
   @clear_interval :timer.seconds(60)
 
-  def put(name \\ __MODULE__, key, value) do
-    true = :ets.insert(tab_name(name), {key, value})
+  def put(key, value) do
+      true = :ets.insert(tab_name(__MODULE__), {key, value})
 
     :ok
   end
