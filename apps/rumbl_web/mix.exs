@@ -37,6 +37,7 @@ defmodule RumblWeb.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:info_sys, in_umbrella: true},
       {:phoenix, "~> 1.4.9"},
       {:phoenix_pubsub, "~> 1.1"},
       {:phoenix_ecto, "~> 4.0"},
