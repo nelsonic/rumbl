@@ -30,6 +30,20 @@ defmodule InfoSys do
     |> Enum.take(opts[:limit])
   end
 
+  defp fetch_cached_results(backends, query, opts) do
+    {uncached_backends, results} =
+      Enum.reduce(
+        backends,
+        {[], []},
+        fn backend, {uncached_backends, acc_results} ->
+          case Cache.fetch({backend.name(), query, opts[:limit]}) do
+            {:ok, results} -> {uncached_backends, [results | acc_results]}
+            :error -> {[backend | uncached_backends], acc_results}
+          end
+        end)
+    {uncached_backends, List.flatten(results)}
+  end
+
   defp async_query(backend, query, opts) do
     Task.Supervisor.async_nolink(InfoSys.TaskSupervisor,
       backend, :compute, [query, opts], shutdown: :brutal_kill
