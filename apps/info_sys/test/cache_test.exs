@@ -20,4 +20,20 @@ defmodule InfoSysTest.CacheTest do
     assert Cache.fetch(name, :notexists) == :error
   end
 
+  defp assert_shutdown(pid) do
+    ref = Process.monitor(pid)
+    Process.unlink(pid)
+    Process.exit(pid, :kill)
+
+    assert_receive {:DOWN, ^ref, :process, ^pid, :killed}
+  end
+
+  defp eventually(func) do
+    if func.() do
+      true
+    else
+      Process.sleep(10)
+      eventually(func)
+    end
+  end
 end
