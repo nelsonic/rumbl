@@ -53,4 +53,20 @@ defmodule RumblWeb.VideoChannel do
       at: annotation.at
     })
   end
+
+  defp compute_additional_info(annotation, socket) do
+    for result <-
+      InfoSys.compute(annotation.body, limit: 1, timeout: 10_000) do
+        backend_user = Accounts.get_user_by(username: result.backend.name())
+        attrs = %{body: result.text, at: annotation.at}
+
+        case Multimedia.annotate_video(
+          backend_user, annotation.video_id, attrs) do
+
+          {:ok, info_ann} ->
+            broadcast_annotation(socket, backend_user, info_ann)
+          {:error, _changeset} -> :ignore
+      end
+    end
+  end
 end
