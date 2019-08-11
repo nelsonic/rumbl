@@ -36,16 +36,21 @@ defmodule RumblWeb.VideoChannel do
   def handle_in("new_annotation", params, user, socket) do
     case Multimedia.annotate_video(user, socket.assigns.video_id, params) do
       {:ok, annotation} ->
-        broadcast!(socket, "new_annotation", %{
-          id: annotation.id,
-          user: RumblWeb.UserView.render("user.json", %{user: user}),
-          body: annotation.body,
-          at: annotation.at
-        })
+        broadcast_annotation(socket, user, annotation)
+        Task.start(fn -> compute_additional_info(annotation, socket) end)
         {:reply, :ok, socket}
 
       {:error, changeset} ->
         {:reply, {:error, %{errors: changeset}}, socket}
     end
+  end
+
+  defp broadcast_annotation(socket, user, annotation) do
+    broadcast!(socket, "new_annotation", %{
+      id: annotation.id,
+      user: RumblWeb.UserView.render("user.json", %{user: user}),
+      body: annotation.body,
+      at: annotation.at
+    })
   end
 end

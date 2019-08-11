@@ -53,6 +53,8 @@ defmodule InfoSys do
   defp write_results_to_cache(results, query, opts) do
     Enum.map(results, fn %Result{backend: backend} = result ->
       :ok = Cache.put({backend.name(), query, opts[:limit]}, result)
+
+      result
     end)
   end
 end
