@@ -19,7 +19,7 @@ defmodule InfoSys do
       {:ok, results} -> results
       _ -> []
     end)
-    |> Enum.sort(&(%1.score >= &2.score))
+    |> Enum.sort(&(&1.score >= &2.score))
     |> Enum.take(opts[:limit])
   end
 
