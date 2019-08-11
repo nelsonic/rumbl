@@ -24,10 +24,9 @@ defmodule Rumbl.Umbrella.MixProject do
   defp deps do
     [
       {:ecto_sql, "~> 3.1"},
-      {:postgrex, ">= 0.0.0"}, 
-      {:pbkdf2_elixir, "~> 1.0"}, 
+      {:postgrex, ">= 0.0.0"},
+      {:pbkdf2_elixir, "~> 1.0"},
       {:sweet_xml, "~> 0.6.5"},
-
     ]
   end
 end
