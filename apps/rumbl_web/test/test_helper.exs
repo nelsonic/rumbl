@@ -1,3 +1,6 @@
+ExUnit.start()
+Ecto.Adapters.SQL.Sandbox.mode(Rumbl.Repo, :manual)
+
 defmodule RumblWeb.TestHelpers do
 
   defp default_user() do
