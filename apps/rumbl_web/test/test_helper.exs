@@ -17,4 +17,18 @@ defmodule RumblWeb.TestHelpers do
       |> Enum.into(default_user())
       |> Rumbl.Accounts.register_user
   end
+
+  defp default_video() do
+    %{
+      url: "test@example.com",
+      description: "a video",
+      body: "body"
+    }
+  end
+
+  def insert_video(user, attrs \\ %{}) do
+    video_fields = Enum.into(attrs, default_video())
+    {:ok, video} = Rumbl.Multimedia.create_video(user, video_fields)
+    video
+  end
 end
