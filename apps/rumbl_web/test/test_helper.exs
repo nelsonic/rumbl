@@ -31,4 +31,11 @@ defmodule RumblWeb.TestHelpers do
     {:ok, video} = Rumbl.Multimedia.create_video(user, video_fields)
     video
   end
+
+  def login(%{conn: conn, login_as: username}) do
+    user = insert_user(username: username)
+    {Plug.Conn.assign(conn, :current_user, user), user}
+  end
+
+  def login(%{conn: conn}), do: {conn, :logged_out}
 end
